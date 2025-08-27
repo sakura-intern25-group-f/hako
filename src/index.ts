@@ -1,13 +1,7 @@
 import { serve } from "@hono/node-server";
-import { Hono } from "hono";
+import { routeApp } from "@/routes.js";
 
-import { createAppRun } from "@/apprun.js";
-
-const app = new Hono();
-
-app.get("/", async (c) => {
-  return c.text(await createAppRun());
-});
+const app = routeApp();
 
 serve(
   {
@@ -16,5 +10,5 @@ serve(
   },
   (info) => {
     console.log(`Server is running on http://localhost:${info.port}`);
-  },
+  }
 );
