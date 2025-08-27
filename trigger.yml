@@ -1,0 +1,22 @@
+name: Use Our Service
+
+on:
+  pull_request:
+    types: [opened, synchronize]
+
+jobs:
+  trigger:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Dispatch to our workflow
+        uses: peter-evans/repository-dispatch@v2
+        with:
+          token: ${{ secrets.OUR_APP_TOKEN }}
+          repository: sakura-intern25-group-f/hako
+          event-type: customer-pr-event
+          client-payload: |
+            {
+              "customer_repo": "${{ github.repository }}",
+              "pr_number": "${{ github.event.pull_request.number }}",
+              "branch": "${{ github.head_ref }}"
+            }
