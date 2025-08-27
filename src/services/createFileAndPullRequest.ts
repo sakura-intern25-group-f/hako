@@ -1,32 +1,34 @@
 import { Octokit } from "@octokit/rest";
 
-/**
- * 指定ファイルを新規ブランチで作成し、コミット・PRを作成する
- */
-export async function createFileAndPullRequest(
+export async function createBranch(
   octokit: Octokit,
   owner: string,
   repo: string,
-  filePath: string,
-  content: string,
   branchName: string,
-  prTitle: string,
-  prBody: string
+  baseBranch: string = "main"
 ) {
-  const { data: baseBranch } = await octokit.repos.getBranch({
+  const { data: baseBranchData } = await octokit.repos.getBranch({
     owner,
     repo,
-    branch: "main",
+    branch: baseBranch,
   });
-  const baseSha = baseBranch.commit.sha;
-
+  const baseSha = baseBranchData.commit.sha;
   await octokit.git.createRef({
     owner,
     repo,
     ref: `refs/heads/${branchName}`,
     sha: baseSha,
   });
+}
 
+export async function createFile(
+  octokit: Octokit,
+  owner: string,
+  repo: string,
+  filePath: string,
+  content: string,
+  branchName: string
+) {
   await octokit.repos.createOrUpdateFileContents({
     owner,
     repo,
@@ -35,13 +37,23 @@ export async function createFileAndPullRequest(
     content: Buffer.from(content).toString("base64"),
     branch: branchName,
   });
+}
 
+export async function createPullRequest(
+  octokit: Octokit,
+  owner: string,
+  repo: string,
+  branchName: string,
+  prTitle: string,
+  prBody: string,
+  baseBranch: string = "main"
+) {
   const pr = await octokit.pulls.create({
     owner,
     repo,
     title: prTitle,
     head: branchName,
-    base: "main",
+    base: baseBranch,
     body: prBody,
   });
   return pr.data;
