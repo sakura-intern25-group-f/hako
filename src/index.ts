@@ -1,5 +1,5 @@
 import { serve } from "@hono/node-server";
-import { routeApp } from "@/routes.js";
+import { routeApp } from "./routes.js";
 
 const app = routeApp();
 
