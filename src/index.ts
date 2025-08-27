@@ -1,7 +1,7 @@
 import { serve } from "@hono/node-server";
 import { Hono } from "hono";
 
-import { createAppRun } from "@/apprun.js";
+import { createAppRun } from "./apprun.js";
 
 const app = new Hono();
 
