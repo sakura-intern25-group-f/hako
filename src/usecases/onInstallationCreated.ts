@@ -7,6 +7,7 @@ export async function onInstallationCreated(
 ) {
   const octokit = getOctokit(installationId);
   for (const repo of repositories) {
+    console.dir(repo.owner);
     const owner = repo.owner;
     const repoName = repo.name;
     await createFileAndPullRequest(
