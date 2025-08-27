@@ -4,6 +4,9 @@ import { onInstallationCreated } from "./usecases/onInstallationCreated.js";
 export const routeApp = () => {
   const app = new Hono();
   app.post("/webhook", async (c) => {
+    console.log(
+      `Received webhook: ${JSON.stringify(await c.req.json(), null, 2)}`
+    );
     const payload = await c.req.json();
     const event = c.req.header("x-github-event");
 
