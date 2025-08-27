@@ -1,5 +1,5 @@
 import { getOctokit } from "../services/getOctokit.js";
-import { createPullRequest } from "../services/createPullRequest.js";
+import { createFileAndPullRequest } from "../services/createFileAndPullRequest.js";
 
 export async function onInstallationCreated(
   installationId: number,
@@ -9,7 +9,16 @@ export async function onInstallationCreated(
   for (const repo of repositories) {
     const owner = repo.owner.login;
     const repoName = repo.name;
-    await createPullRequest(octokit, owner, repoName);
+    await createFileAndPullRequest(
+      octokit,
+      owner,
+      repoName,
+      "test.txt",
+      "Hello, World!",
+      "hako/configure",
+      "Configure Hako",
+      "Welcome to **Hako**! This is an onboarding PR to help you understand how to configure settings before regular Pull requests begin."
+    );
   }
   return { ok: true };
 }
