@@ -8,12 +8,15 @@ import path from "path";
 import fs from "fs";
 
 const read_assets = (filename: string) =>
-  fs.readFileSync(path.join(process.cwd(), "assets", filename), "utf8");
+  fs.readFileSync(
+    path.join(import.meta.dirname, "../../assets", filename),
+    "utf8"
+  );
 
 const trigger_file_name = "hako.yml";
 const trigger_file_body = read_assets(trigger_file_name);
 
-const onboarding_file_name = "onboarding-pr.yml";
+const onboarding_file_name = "onboarding-pr.md";
 const onboarding_file_body = read_assets(onboarding_file_name);
 
 export async function onInstallationCreated(
