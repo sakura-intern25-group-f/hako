@@ -10,6 +10,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
+      - name: Apply Environment Variables
+        run: |
+          echo "${{ secrets.GITHUB_APP_ID }}" >> ./assets/build.env
+          echo "${{ secrets.GITHUB_APP_PRIVATE_KEY }}" >> ./assets/build.env
       - name: Deploy to Sakura AppRun
         uses: meso/sakura-apprun-action@v3
         with:

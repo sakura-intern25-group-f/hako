@@ -4,20 +4,13 @@ import {
   createFile,
   createPullRequest,
 } from "../services/createFileAndPullRequest.js";
-import path from "path";
-import fs from "fs";
-
-const read_assets = (filename: string) =>
-  fs.readFileSync(
-    path.join(import.meta.dirname, "../../assets", filename),
-    "utf8"
-  );
+import { readAsset } from "../services/readAsset.js";
 
 const trigger_file_name = "hako.yml";
-const trigger_file_body = read_assets(trigger_file_name);
+const trigger_file_body = readAsset(trigger_file_name);
 
 const onboarding_file_name = "onboarding-pr.md";
-const onboarding_file_body = read_assets(onboarding_file_name);
+const onboarding_file_body = readAsset(onboarding_file_name);
 
 export async function onInstallationCreated(
   installationId: number,
