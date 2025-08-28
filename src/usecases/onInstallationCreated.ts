@@ -31,7 +31,7 @@ export async function onInstallationCreated(
         octokit,
         owner,
         repoName,
-        `.github/${trigger_file_name}`,
+        `.github/workflows/${trigger_file_name}`,
         trigger_file_body,
         branchName
       );
