@@ -1,11 +1,15 @@
 import { Octokit } from "@octokit/rest";
 import { createAppAuth } from "@octokit/auth-app";
-import { readAsset } from "./readAsset.js";
+import dotenv from "dotenv";
+import path from "path";
+
+dotenv.config({
+  path: path.join(import.meta.dirname, "../../assets", "build.env"),
+});
 
 export function getOctokit(installationId: number) {
-  const build_env = readAsset("build.env").split("\n");
-  const APP_ID = build_env[0];
-  const PRIVATE_KEY = build_env[1];
+  const APP_ID = process.env.GITHUB_APP_ID;
+  const PRIVATE_KEY = process.env.GITHUB_APP_PRIVATE_KEY;
   if (!APP_ID) {
     throw new Error("Missing required environment variable: GITHUB_APP_ID");
   }
