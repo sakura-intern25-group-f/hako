@@ -12,8 +12,8 @@ jobs:
       - uses: actions/checkout@v5
       - name: Apply Environment Variables
         run: |
-          echo "${{ secrets.ENV_GITHUB_APP_ID }}" >> ./assets/build.env
-          echo "${{ secrets.ENV_GITHUB_APP_PRIVATE_KEY }}" >> ./assets/build.env
+          echo "GITHUB_APP_ID=${{ secrets.ENV_GITHUB_APP_ID }}" >> ./assets/build.env
+          echo "GITHUB_APP_PRIVATE_KEY=${{ secrets.ENV_GITHUB_APP_PRIVATE_KEY }}" >> ./assets/build.env
       - name: Deploy to Sakura AppRun
         uses: meso/sakura-apprun-action@v3
         with:
