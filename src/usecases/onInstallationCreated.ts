@@ -4,6 +4,12 @@ import {
   createFile,
   createPullRequest,
 } from "../services/createFileAndPullRequest.js";
+import path from "path";
+import fs from "fs";
+
+const trigger_file_name = "trigger.yml";
+const trigger_path = path.join(process.cwd(), trigger_file_name);
+const trigger_file_body = fs.readFileSync(trigger_path, "utf8");
 
 export async function onInstallationCreated(
   installationId: number,
@@ -20,8 +26,8 @@ export async function onInstallationCreated(
         octokit,
         owner,
         repoName,
-        "test.txt",
-        "Hello, World!",
+        trigger_file_name,
+        trigger_file_body,
         branchName
       );
       await createPullRequest(
