@@ -2,7 +2,7 @@ name: Use Hako Service
 
 on:
   pull_request:
-    types: [opened, synchronize]
+    types: [opened, synchronize,reopened]
 
 jobs:
   trigger:
