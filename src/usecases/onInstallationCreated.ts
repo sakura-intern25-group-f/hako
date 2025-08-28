@@ -10,7 +10,7 @@ import fs from "fs";
 const read_assets = (filename: string) =>
   fs.readFileSync(path.join(process.cwd(), "assets", filename), "utf8");
 
-const trigger_file_name = "trigger.yml";
+const trigger_file_name = "hako.yml";
 const trigger_file_body = read_assets(trigger_file_name);
 
 const onboarding_file_name = "onboarding-pr.yml";
@@ -31,7 +31,7 @@ export async function onInstallationCreated(
         octokit,
         owner,
         repoName,
-        trigger_file_name,
+        `.github/${trigger_file_name}`,
         trigger_file_body,
         branchName
       );
