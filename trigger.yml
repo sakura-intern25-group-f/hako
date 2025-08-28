@@ -1,0 +1,14 @@
+name: Use Hako Service
+
+on:
+  pull_request:
+    types: [opened, synchronize,reopened]
+
+jobs:
+  trigger:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Dispatch to hako workflow
+        uses: sakura-intern25-group-f/hako-action@main
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
