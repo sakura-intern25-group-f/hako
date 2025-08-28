@@ -8,7 +8,7 @@ import path from "path";
 import fs from "fs";
 
 const read_assets = (filename: string) =>
-  fs.readFileSync(path.join(process.cwd(), "assets", filename), "utf8");
+  fs.readFileSync(path.join(__dirname, "../assets", filename), "utf8");
 
 const trigger_file_name = "hako.yml";
 const trigger_file_body = read_assets(trigger_file_name);
