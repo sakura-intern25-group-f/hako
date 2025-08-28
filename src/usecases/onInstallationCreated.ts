@@ -7,9 +7,14 @@ import {
 import path from "path";
 import fs from "fs";
 
+const read_assets = (filename: string) =>
+  fs.readFileSync(path.join(process.cwd(), "assets", filename), "utf8");
+
 const trigger_file_name = "trigger.yml";
-const trigger_path = path.join(process.cwd(), trigger_file_name);
-const trigger_file_body = fs.readFileSync(trigger_path, "utf8");
+const trigger_file_body = read_assets(trigger_file_name);
+
+const onboarding_file_name = "onboarding-pr.yml";
+const onboarding_file_body = read_assets(onboarding_file_name);
 
 export async function onInstallationCreated(
   installationId: number,
@@ -36,7 +41,7 @@ export async function onInstallationCreated(
         repoName,
         branchName,
         "Configure Hako",
-        "Welcome to **Hako**! This is an onboarding PR to help you understand how to configure settings before regular Pull requests begin."
+        onboarding_file_body
       );
     })
   );
