@@ -1,13 +1,6 @@
 import { Octokit } from "@octokit/rest";
 import sodium from "libsodium-wrappers";
 
-const decodeBase64 = (base64: string) => {
-  return new Uint8Array(Buffer.from(base64, "base64"));
-};
-const encodeBase64 = (bin: Uint8Array) => {
-  return Buffer.from(bin).toString("base64");
-};
-
 export const createSecret = async (
   octkit: Octokit,
   owner: string,
@@ -19,12 +12,18 @@ export const createSecret = async (
   const key_resp = await octkit.rest.actions.getRepoPublicKey({ owner, repo });
   const key_id = key_resp.data.key_id;
   const pub_key = key_resp.data.key;
-  const encrypted_value = sodium.crypto_box_seal(secret, decodeBase64(pub_key));
+  const encrypted_value = sodium.crypto_box_seal(
+    sodium.from_string(secret),
+    sodium.from_base64(pub_key, sodium.base64_variants.ORIGINAL),
+  );
   await octkit.rest.actions.createOrUpdateRepoSecret({
     owner,
     repo,
     secret_name,
     key_id,
-    encrypted_value: encodeBase64(encrypted_value),
+    encrypted_value: sodium.to_base64(
+      encrypted_value,
+      sodium.base64_variants.ORIGINAL,
+    ),
   });
 };
