@@ -24,15 +24,6 @@ export async function onInstallationCreated(
       const repoName = repo.name;
       const branchName = "hako/configure";
 
-      if (
-        !process.env.SAKURACR_REGISTRY ||
-        !process.env.SAKURACR_USER ||
-        !process.env.SAKURACR_PASSWORD ||
-        !process.env.SAKURA_API_TOKEN ||
-        !process.env.SAKURA_API_SECRET
-      ) {
-        throw new Error("Sakura envs missing!");
-      }
       await createSecret(
         octokit,
         owner,
