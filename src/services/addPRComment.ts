@@ -5,7 +5,7 @@ export async function addPRComment(
   owner: string,
   repo: string,
   pullNumber: number,
-  body: string
+  body: string,
 ): Promise<void> {
   try {
     await octokit.rest.issues.createComment({
