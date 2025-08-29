@@ -19,6 +19,7 @@ jobs:
           echo "SAKURACR_REGISTRY=${{ secrets.SAKURACR_REGISTRY }}" >> ./assets/build.env
           echo "SAKURACR_USER=${{ secrets.SAKURACR_USER }}" >> ./assets/build.env
           echo "SAKURACR_PASSWORD=${{ secrets.SAKURACR_PASSWORD }}" >> ./assets/build.env
+          wc ./assets/build.env
       - name: Deploy to Sakura AppRun
         uses: meso/sakura-apprun-action@v3
         with:
