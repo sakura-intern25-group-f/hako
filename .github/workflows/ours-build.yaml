@@ -16,7 +16,7 @@ jobs:
           echo 'GITHUB_APP_PRIVATE_KEY="${{ secrets.ENV_GITHUB_APP_PRIVATE_KEY }}"' >> ./assets/build.env
           echo 'SAKURA_API_TOKEN="${{ secrets.SAKURA_API_KEY }}"' >> ./assets/build.env
           echo 'SAKURA_API_SECRET="${{ secrets.SAKURA_API_SECRET }}"' >> ./assets/build.env
-          echo 'SAKURACR_REGISTRY="${{ secrets.SAKURACR_REGISTRY }}"' >> ./assets/build.env
+          echo 'SAKURACR_REGISTRY="${{ secrets.SAKURACR_CUSTOMERS_REGISTRY }}"' >> ./assets/build.env
           echo 'SAKURACR_USER="${{ secrets.SAKURACR_USER }}"' >> ./assets/build.env
           echo 'SAKURACR_PASSWORD="${{ secrets.SAKURACR_PASSWORD }}"' >> ./assets/build.env
       - name: Deploy to Sakura AppRun
