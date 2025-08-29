@@ -1,11 +1,5 @@
 import { Octokit } from "@octokit/rest";
 import { createAppAuth } from "@octokit/auth-app";
-import dotenv from "dotenv";
-import path from "path";
-
-dotenv.config({
-  path: path.join(import.meta.dirname, "../../assets", "build.env"),
-});
 
 export function getOctokit(installationId: number) {
   const APP_ID = process.env.GITHUB_APP_ID;

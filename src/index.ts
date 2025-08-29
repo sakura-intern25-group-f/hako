@@ -1,5 +1,11 @@
+import dotenv from "dotenv";
+import path from "path";
 import { serve } from "@hono/node-server";
 import { routeApp } from "./routes.js";
+
+dotenv.config({
+  path: path.join(import.meta.dirname, "../assets", "build.env"),
+});
 
 const app = routeApp();
 
