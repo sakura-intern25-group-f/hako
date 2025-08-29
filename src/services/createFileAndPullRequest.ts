@@ -5,7 +5,7 @@ export async function createBranch(
   owner: string,
   repo: string,
   branchName: string,
-  baseBranch: string = "main"
+  baseBranch: string = "main",
 ) {
   const { data: baseBranchData } = await octokit.repos.getBranch({
     owner,
@@ -27,7 +27,7 @@ export async function createFile(
   repo: string,
   filePath: string,
   content: string,
-  branchName: string
+  branchName: string,
 ) {
   await octokit.repos.createOrUpdateFileContents({
     owner,
@@ -46,7 +46,7 @@ export async function createPullRequest(
   branchName: string,
   prTitle: string,
   prBody: string,
-  baseBranch: string = "main"
+  baseBranch: string = "main",
 ) {
   const pr = await octokit.pulls.create({
     owner,

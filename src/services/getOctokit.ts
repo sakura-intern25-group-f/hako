@@ -15,7 +15,7 @@ export function getOctokit(installationId: number) {
   }
   if (!PRIVATE_KEY) {
     throw new Error(
-      "Missing required environment variable: GITHUB_APP_PRIVATE_KEY"
+      "Missing required environment variable: GITHUB_APP_PRIVATE_KEY",
     );
   }
   return new Octokit({
