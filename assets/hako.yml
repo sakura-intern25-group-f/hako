@@ -2,7 +2,7 @@ name: Use Hako Service
 
 on:
   pull_request:
-    types: [opened, synchronize,reopened]
+    types: [opened, synchronize, reopened]
 
 jobs:
   trigger:
@@ -12,3 +12,8 @@ jobs:
         uses: sakura-intern25-group-f/hako-action@main
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
+          sakuracr_registry: ${{ secrets.SAKURACR_REGISTRY }}
+          sakuracr_user: ${{ secrets.SAKURACR_USER }}
+          sakuracr_password: ${{ secrets.SAKURACR_PASSWORD }}
+          sakura_api_token: ${{ secrets.SAKURA_API_TOKEN }}
+          sakura_api_secret: ${{ secrets.SAKURA_API_SECRET }}
